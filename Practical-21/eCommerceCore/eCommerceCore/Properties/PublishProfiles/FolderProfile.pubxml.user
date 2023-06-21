@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\jenish\Desktop\All Practicals\IIS Deployment</_PublishTargetUrl>
+    <History>True|2023-06-21T11:22:37.4875349Z;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=SF-CPU-583\SQLEXPRESS%3bInitial Catalog= eCommerceCore%3b Integrated Security = true%3bTrusted_Connection=SSPI%3bEncrypt=false%3bTrustServerCertificate=true%3bMultipleActiveResultSets=True</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="eCommerceCore.Models.AppDbContext">
+      <Value>Data Source=SF-CPU-583\SQLEXPRESS%3bInitial Catalog= eCommerceCore%3b Integrated Security = true%3bTrusted_Connection=SSPI%3bEncrypt=false%3bTrustServerCertificate=true%3bMultipleActiveResultSets=True</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>
