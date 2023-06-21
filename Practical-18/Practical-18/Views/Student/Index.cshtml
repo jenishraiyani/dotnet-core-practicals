@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Practical_18.Models.StudentDto>
+
+@{
+    ViewData["Title"] = "Index";
+   
+}
+
+
+
+<h1>Student List</h1>
+<hr />
+
+<p>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#studentForm" id="add"  onclick="showForm(this.id)">
+        Add Student</button>
+   @* <a asp-action="Create" class="btn btn-primary">Add Student</a>*@
+</p>
+<div id="form-content">
+</div>
+
+<table class="table" id="studentTable">
+    <thead>
+        <tr>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.StudentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="student">
+    @foreach (var item in Model) {
+        <tr>
+             
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+ 
+                    <button type="button" id="edit" class="btn btn-warning" data-toggle="ajax-modal" data-target="#studentForm" value="@item.StudentId" onclick="showForm(this.value) ">
+                        Edit
+                    </button> |
+                 @*   <button type="button" class="btn btn-info" data-toggle="ajax-modal" data-target="#studentForm" data-url="@Url.Action($"Details/{item.StudentId}")">
+                        Details
+                    </button> |*@
+                    <a data-student-id="@item.StudentId" class="btn btn-danger js-delete">Delete</a>
+         
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@section Scripts {
+
+    <script src="/js/student-ajax.js"></script>
+
+}
+ 
