@@ -1,0 +1,102 @@
+﻿@model IEnumerable<Practical17.Models.Students>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Student List</h1>
+<hr />
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add Student</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="student">
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td> 
+                    <a asp-action="Details" asp-route-id="@item.StudentId"class="btn btn-info">Details</a>  
+                    @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+                    {
+                     <a asp-action="Edit" asp-route-id="@item.StudentId" class="btn btn-warning">Edit</a>
+                      <a  data-student-id="@item.StudentId" class="btn btn-danger js-delete">Delete</a>
+                    }
+                
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<script>
+        $(document).ready(function () {
+
+            $("#student .js-delete").on("click", function () {
+
+                var button = $(this);
+                let id = $(this).attr("data-student-id")
+
+                if (confirm("Are you sure you want to delete this record")) {
+                    $.ajax({
+                        url: '@Url.Action("Delete", "Student")',
+                        method: "POST",
+                        data: { id: id },
+                        success: function (result) {
+                            if (result) {
+                                button.parents("tr").remove();
+                                alert("Record deleted successfully!!");
+                            } else {
+                                alert("Something went wrong!!");
+                            }
+
+                        },
+                        error: function () {
+                            alert('An error occurred while deleting the record.');
+                        }
+                    });
+                }
+
+
+            });
+
+        });
+
+    </script>
+
+ 
+    
+ 
